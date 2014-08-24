@@ -1,0 +1,67 @@
+{% extends 'penntext/base.html' %}
+    
+{% block title %} Tickets {% endblock %}
+
+{% block body_block %}
+            {% if user.is_authenticated %}
+            <font size="4">            
+            <a href="/localquaker/add_ticket"> Add a New Advertisement </a>
+            </font>
+            <hr>
+            {% endif %}
+
+    {% if ticket_list %}
+            <font size="3">
+            
+                {% for ticket in ticket_list %} 
+               <font color="red"> {{ ticket.name }} </font> is selling tickets for <font color="blue"> {{ticket.ticket}} </font>
+                </br>
+                 </br>
+                 {{ticket.description}}</br> </br>
+                 {% if ticket.contact %}
+
+                 Contact At: {{ticket.contact}} (Phone) or send an email at {{ticket.email}}. </br>
+
+                 {% else %}
+                 Contact At: Email at {{ticket.email}}. </br>
+                 {% endif %}
+					
+				 Price: ${{ticket.price}} </br>
+                 Posted At: {{ticket.time}}
+                <br>
+<div>
+        {% if ticket.picture %}
+            <br>
+            <img src="{{ ticket.picture.url }}"  />
+        {% endif %}
+</div>
+
+                <div id={{ticket.id}} style="display: none"> 
+
+                <form id="price_offer" action="/localquaker/{{ticket.name}}/{{ticket.url}}/ticketsell/{{price}}{{email}}">
+<br>
+                Name: <input type ="text" name = "name"> </br>
+                Contact Email: <input type="email" name = "email"> </br>
+                Price: <input type="number" name="price"> </br>
+   </br>
+                <input type="submit"/>
+                </form>
+                <br>
+</div> 
+<br>
+
+
+
+
+<input type="button" onclick="Javascript: showMsgs('{{ticket.id}}');" value="Offer Form"> </button>
+
+<hr>
+                {% endfor %}
+
+                
+            </font>
+            {% else %}
+                <strong>No one is selling any tickets at this moment.</strong>
+            {% endif %}
+        
+{% endblock %}

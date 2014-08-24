@@ -1,0 +1,27 @@
+{% extends 'penntext/base.html' %}
+{% block title %} Add Term {% endblock %}
+{% block rightbar %}
+            {% for term in terms %}
+                <a href="/localquaker/term/{{term.url}}" class="list-group-item"> {{term.name}} </a>
+            {% endfor %} 
+{% endblock %}       
+{% block body_block %}
+    <h1>Add a Term</h1>
+    
+    <form id="term_form" method="post" action="/localquaker/add_term/">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+
+      {% for field in form.visible_fields %}
+            <div class = "form-group">
+            {{ field.errors }}
+            {{ field.help_text }}
+            </br>{{ field }}
+        </div>
+        {% endfor %}
+
+      <input type="submit" name="submit" value="Create Term" />
+    </form>
+{% endblock %}

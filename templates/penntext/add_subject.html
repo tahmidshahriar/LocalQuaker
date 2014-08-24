@@ -1,0 +1,27 @@
+{% extends 'penntext/base.html' %}
+{% block title %} Add Subject {% endblock %}
+{% block rightbar %}
+            {% for subject in subjects %}
+                <a href="/localquaker/subject/{{subject.url}}" class="list-group-item"> {{subject.name}} </a>
+            {% endfor %} 
+{% endblock %}       
+{% block body_block %}
+    <h1>Add a Subject</h1>
+    
+    <form id="subject_form" method="post" action="/localquaker/add_subject/">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+
+      {% for field in form.visible_fields %}
+           <div class = "form-group">
+            {{ field.errors }}
+            {{ field.help_text }}
+            </br>{{ field }}
+        </div>
+        {% endfor %}
+
+      <input type="submit" name="submit" value="Create Subject" />
+    </form>
+{% endblock %}

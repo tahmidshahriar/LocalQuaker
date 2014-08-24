@@ -1,0 +1,35 @@
+from django.conf.urls import patterns, url
+from penntext import views
+
+urlpatterns = patterns('',                        
+                        url(r'^$', views.index, name='index'),
+                        url(r'^about/', views.about, name='about'),
+                        url(r'^subject/(?P<subject_name_url>\w+)/$', views.subject, name='subject'),
+                        url(r'^add_subject/$', views.add_subject, name ='add_subject'),                       
+                        url(r'^subject/(?P<subject_name_url>\w+)/add_sale/$', views.add_sale, name='add_sale'),
+                        url(r'^register/$', views.register, name = 'register'),
+                        url(r'^login/$', views.user_login, name='login'),
+                        url(r'^logout/$', views.user_logout, name='logout'),
+                        url(r'^my_sale/$', views.my_sale, name='my_sale'),
+                        url(r'^(?P<sell_name_url>\w+)/del_sale/(?P<sell_id>\w+)/$', views.del_sale, name = 'del_sale'),
+                        url(r'^subject/$', views.sublist, name= 'sublist'),
+                        url(r'^term/$', views.termlist, name= 'termlist'),
+                        url(r'^add_term/$', views.add_term, name='add_term'),
+                        url(r'^term/(?P<term_name_url>\w+)/$', views.term, name='term'),
+                        url(r'^term/(?P<term_name_url>\w+)/add_subsale/$', views.add_subsell, name='add_subsell'),
+                        url(r'^ticketsell/$', views.tickets, name = 'tickets'),
+                        url(r'^householdsell/$', views.households, name = 'household'),
+                        url(r'^other/$', views.others, name = 'other'),
+                        url(r'^add_ticket/$', views.add_ticket, name='add_ticket'),
+                        url(r'^add_household/$', views.add_household, name='add_ticket'),
+                        url(r'^add_other/$', views.add_other, name='add_ticket'),
+                        url(r'^confirm/(?P<activation_key>\w+)/$', views.confirm, name = 'confirm'),             
+
+                        url(r'^(?P<sell_name_url>\w+)/del_othersale/(?P<sell_id>\w+)/$', views.del_othersale, name = 'del_othersale'),
+                        url(r'^(?P<sell_name_url>\w+)/del_subsale/(?P<sell_id>\w+)/$', views.del_subsale, name = 'del_subsale'),
+                        url(r'^(?P<sell_name_url>\w+)/del_ticketsale/(?P<sell_id>\w+)/$', views.del_ticketsale, name = 'del_ticketsale'),
+                        url(r'^(?P<sell_name_url>\w+)/del_housesale/(?P<sell_id>\w+)/$', views.del_housesale, name = 'del_housesale'),
+
+                        url(r'^(?P<username>\w+)/(?P<book>\w+)/(?P<req>\w+)/$', views.offer, name = 'offer'),                      
+                        url(r'^(?P<term>\w+)/(?P<username>\w+)/(?P<book>\w+)/(?P<req>\w+)/$', views.offerTerm, name = 'offerTerm'),                      
+                    )

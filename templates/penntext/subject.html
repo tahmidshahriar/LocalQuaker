@@ -1,0 +1,76 @@
+{% extends 'penntext/base.html' %}
+    
+{% block title %}{{ subject_name }} {% endblock %}
+{% block rightbar %}
+            {% for subject in subjects %}
+                <a href="/localquaker/subject/{{subject.url}}" class="list-group-item"> {{subject.name}} </a>
+            {% endfor %} 
+{% endblock %}       
+
+{% block body_block %}
+	
+            {% if user.is_authenticated %}
+            <font size="4">            
+            <a href="/localquaker/subject/{{subject_name_url}}/add_sale"> Add a New Advertisement </a>
+            </font>
+            <hr>
+            {% endif %}
+
+    {% if subject %}
+            {% if sells %}
+            <font size="3">
+            
+                {% for sell in sells %} 
+                
+                <font color="red"> {{ sell.name }} </font> is selling <font color="blue"> {{sell.book}} </font> for <font color="blue"> {{sell.subject}} {{sell.course}}. </font> </br>
+                 </br>
+                 {% if sell.contact %}
+
+                 Contact At: {{sell.contact}} (Phone) or send an email at {{sell.email}}. </br>
+
+                 {% else %}
+                 Contact At: Email at {{sell.email}}. </br>
+                 {% endif %}
+
+                 Price: ${{sell.price}} </br>
+                 Posted At: {{sell.time}}
+                <div>
+        {% if sell.picture %}
+            <br>
+            <img src="{{ sell.picture.url }}"  />
+        {% endif %}
+</div>
+
+                <div id={{sell.id}} style="display: none"> 
+
+                <form id="price_offer" action="/localquaker/subject/{{sell.name}}/{{sell.url}}/{{sell.subjurl}}/{{price}}{{email}}">
+<strong>        <br>
+                Name: <input type ="text" name = "name"> </br>
+                Contact Email: <input type="email" name = "email"> </br>
+                Price: <input type="number" name="price"> </br>
+</strong>   </br> 
+                <input type="submit"/>
+                </form>
+                <br>
+</div> 
+<br><br>
+
+
+
+
+<input type="button" onclick="Javascript: showMsgs('{{sell.id}}');" value="Offer Form"> </button>
+
+<hr>
+
+                
+                {% endfor %}
+
+                
+            </font>
+            {% else %}
+                <strong>No one is selling books for this subject.</strong>
+            {% endif %}
+        {% else %}
+            {{ subject_name }} does not exist yet!
+        {% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'penntext/base.html' %}    
+{% block title %} Subletting (Terms) {% endblock %}
+{% block rightbar %}
+            {% for term in terms %}
+                <a href="/localquaker/term/{{term.url}}" class="list-group-item"> {{term.name}} </a>
+            {% endfor %} 
+{% endblock %}       
+
+{% block body_block %}
+	
+    {% if terms %}
+           <strong> Choose from above the term you wish to sublet for. </strong>
+    {% else %}
+                <strong>No one is subletting houses at this moment.</strong>
+    {% endif %}
+            </br>
+            <hr>
+            {% if user.is_authenticated %}
+            <font size="4">            
+            <a href="/localquaker/add_term"> Don't see the term you seek on the list? Add it!</a>
+            </font>
+            {% endif %}
+        
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'penntext/base.html' %}
+    
+{% block title %}{{ term_name }} {% endblock %}
+{% block rightbar %}
+            {% for term in terms %}
+                <a href="/localquaker/term/{{term.url}}" class="list-group-item"> {{term.name}} </a>
+            {% endfor %} 
+{% endblock %}       
+
+{% block body_block %}
+{% if user.is_authenticated %}
+            <font size="4">            
+            <a href="/localquaker/term/{{term_name_url}}/add_subsale"> Add a New Advertisement </a>
+            </font>
+            {% endif %}
+            <hr>	
+    {% if term %}
+
+            {% if subsells %}
+            <font size="3">
+            
+                {% for subsell in subsells %} 
+               
+               <font color="red"> {{ subsell.name }} </font> is renting <font color="blue"> {{subsell.title}} </font>
+                 </br> </br>
+                 {{subsell.description}}</br> </br>
+                 {% if subsell.contact %}
+
+                 Contact At: {{subsell.contact}} (Phone) or send an email at {{subsell.email}}. </br>
+
+                 {% else %}
+                 Contact At: Email at {{subsell.email}}. </br>
+                 {% endif %}
+
+                 Price: ${{subsell.price}} </br>
+                 Posted At: {{subsell.time}}
+                <div>
+        {% if subsell.picture %}
+            <br>
+            <img src="{{ subsell.picture.url }}"  />
+        {% endif %}
+</div>
+
+<div id={{subsell.id}} style="display: none"> 
+
+                <form id="price_offer" action="/localquaker/term/{{subsell.name}}/{{subsell.url}}/{{subsell.termurl}}/{{price}}{{email}}">
+<strong>        <br>
+                Name: <input type ="text" name = "name"> </br>
+                Contact Email: <input type="email" name = "email"> </br>
+                Price: <input type="number" name="price"> </br>
+</strong>   </br>
+                <input type="submit"/>
+                </form>
+                <br>
+</div> 
+<br><br>
+
+
+
+
+<input type="button" onclick="Javascript: showMsgs('{{subsell.id}}');" value="Offer Form"> </button>
+
+<hr>
+                                
+                {% endfor %}
+
+                
+            </font>
+            {% else %}
+                <strong>No one is subletting for this term.</strong>
+            {% endif %}
+                  {% else %}
+            {{ term_name }} does not exist yet!
+        {% endif %}
+{% endblock %}

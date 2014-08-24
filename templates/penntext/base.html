@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta name= "viewport" content="width = device - width, initial-scale = 1.0">
+
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+        <link href="{% static 'css/bootstrap-responsive.css' %}" rel="stylesheet">
+        <link href="{% static 'css/navbar-static-top.css' %}" rel="stylesheet">
+        {% block inp %}
+        <link href="{% static 'css/input.css' %}" rel="stylesheet">
+        {% endblock %}
+
+        <title>LocalQuaker {% block title %}  {% endblock %} </title>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+      <div class="masthead">
+
+      {% if user.is_authenticated %}
+
+        <h3 class="text-muted">LocalQuaker <strong>({{user.username}})</strong></h3>
+
+      {% else %}
+
+
+        <h3 class="text-muted">LocalQuaker</h3>
+    {% endif %}
+
+
+
+        <ul class="nav nav-justified">
+          <li><a href="/">Home</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="/localquaker/my_sale/">My Sales</a></li>
+          <li><a href="/localquaker/logout/">Logout</a></li>
+
+          {% else %}
+          <li><a href="/localquaker/login/">Login</a></li>
+
+          <li><a href="/localquaker/register/">Register</a></li>
+          {% endif %}
+                    <li><a href="/localquaker/about/">About</a></li>
+
+        </ul>
+      </div>
+
+    <!--Ends here -->
+    </br>
+
+
+
+          <p>
+
+
+
+
+
+            <div ul class="masthead">
+          <a class="btn btn-lg btn-success" href="/localquaker/subject/" class="list-group-item"> Books (Subjects) </a>
+          <a class="btn btn-lg btn-success" href="/localquaker/term/" class="list-group-item"> Subletting (Terms) </a>
+          <a class="btn btn-lg btn-success" href="/localquaker/ticketsell/" class="list-group-item"> Tickets </a>
+          <a class="btn btn-lg btn-success" href="/localquaker/householdsell/" class="list-group-item"> Household Items </a>
+          <a class="btn btn-lg btn-success" href="/localquaker/other/" class="list-group-item"> Others </a>
+            </div>
+
+        </br>
+
+        {% block rightbar %}
+
+           {% endblock %}
+<hr>
+            <div> <strong>
+                    {% block body_block %}
+                    {% endblock %}
+            </div> </strong>
+
+        <hr>
+    <!--Ends here -->
+
+
+    <footer>
+    <div class="container">
+        <p>&copy; LocalQuaker 2014</p>
+    </div>
+    </footer>
+
+    <script>
+
+      function showMsgs(thediv){
+
+        document.getElementById( thediv ).style.display = 'block';
+
+      }
+    </script>
+
+    <script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/offcanvas.js' %}"></script>
+    <script src="{% static 'js/form.js' %}"></script>
+    </body>
+
+</html>

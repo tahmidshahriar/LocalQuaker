@@ -1,0 +1,102 @@
+{% extends 'penntext/base.html' %}
+    
+{% block title %}{{ subject_name }} {% endblock %}
+        
+{% block body_block %}
+	
+            <font size="3">
+            {% if sells %}
+            <strong>
+                You currently have the following books up for sale:</strong>
+                {% for sell in sells %} 
+
+                <li>{{sell.book}} for {{sell.subject}} {{sell.course}} posted on {{sell.time}} for {{sell.price}}. 
+                    <a href="/localquaker/{{sell.url}}/del_sale/{{sell.id}}"> Delete </a>
+                </li>
+                
+
+                {% endfor %}
+            {% endif %}
+
+                {% if subsells %}
+                <hr>
+
+                <strong>You currently have the following sublets up for rent:</strong>
+				{% for sell in subsells %} 
+                
+                <li>{{sell.title}} posted on {{sell.time}} for {{sell.price}}. 
+                    <a href="/localquaker/{{sell.url}}/del_subsale/{{sell.id}}"> Delete </a>
+                </li>
+                
+
+
+                {% endfor %}
+                {% endif %}
+                {% if ticketsells %}
+                <hr><strong>
+                You currently have the following tickets up for sale:</strong>
+                {% for sell in ticketsells %} 
+
+                <li>{{sell.ticket}} posted on {{sell.time}} for {{sell.price}}. 
+                    <a href="/localquaker/{{sell.url}}/del_ticketsale/{{sell.id}}"> Delete </a>
+                </li>
+                
+
+
+                {% endfor %}
+                <hr>
+                {% endif %}
+                
+                {% if householdsells %}
+                <strong>You currently have the following household items for sale:</strong>
+				{% for sell in householdsells %} 
+
+                <li>{{sell.item}} posted on {{sell.time}} for {{sell.price}}.
+                
+                <a href="/localquaker/{{sell.url}}/del_housesale/{{sell.id}}"> Delete </a>
+                </li>
+                
+
+
+                {% endfor %}                
+                <hr>
+                {% endif %}
+
+                {% if othersells %}
+                <strong>You currently have the following miscellaneous items for sale:
+				</strong>
+                {% for sell in othersells %} 
+
+                <li>{{sell.title}} posted on {{sell.time}} for {{sell.price}}.
+
+                <a href="/localquaker/{{sell.url}}/del_othersale/{{sell.id}}"> Delete </a>  
+
+
+
+                </form>
+                
+
+
+                </li>
+                
+
+
+                {% endfor %}
+                {% endif %}
+
+
+            {% if not sells %}
+            {% if not othersells %}
+            {% if not householdsells %}
+            {% if not ticketsells %}
+            {% if not subsells %}
+            You currently have no item up for sale.
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            {% endif %}
+            
+
+            </font>
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends 'penntext/base.html' %}
+{% block title %} Household Items {% endblock %}
+
+{% block body_block %}
+	{% if user.is_authenticated %}
+            <font size="4">            
+            <a href="/localquaker/add_household"> Add a New Advertisement </a>
+            </font>
+            {% endif %}
+        <hr>
+
+    {% if household_list %}
+            <font size="3">
+            
+                {% for household in household_list %} 
+                
+               <font color="red"> {{ household.name }} </font> is selling <font color="blue"> {{household.item}} </font>
+                 </br></br>
+                 {{household.description}}</br> </br>
+                 {% if household.contact %}
+
+                 Contact At: {{household.contact}} (Phone) or send an email at {{household.email}}. </br>
+
+                 {% else %}
+                 Contact At: Email at {{household.email}}. </br>
+                 {% endif %}
+
+                 Price: ${{household.price}} </br>
+                 Posted At: {{household.time}}
+         <div>
+        {% if household.picture %}
+      		<br>
+            <img src="{{ household.picture.url }}"  />
+        {% endif %}
+</div>
+
+</br>
+</br>
+<div id={{household.id}} style="display: none"> 
+
+                <form id="price_offer" action="/localquaker/{{household.name}}/{{household.url}}/householdsell/{{price}}{{email}}">
+<strong>
+                Name: <input type ="text" name = "name"> </br>
+                Contact Email: <input type="email" name = "email"> </br>
+                Price: <input type="number" name="price"> </br>
+</strong>   </br>
+                <input type="submit"/>
+                </form>
+                <br>
+</div> 
+
+<input type="button" onclick="Javascript: showMsgs('{{household.id}}');" value="Offer Form"> </button>
+
+<hr>
+                {% endfor %}
+
+ 
+                
+            </font>
+            {% else %}
+                <strong>No one is selling any household items at this moment.</strong>
+            {% endif %}
+            
+{% endblock %}

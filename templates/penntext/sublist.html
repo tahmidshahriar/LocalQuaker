@@ -1,0 +1,26 @@
+{% extends 'penntext/base.html' %}    
+{% block title %} Books (Subjects) {% endblock %}
+{% block rightbar %}
+            {% for subject in subjects %}
+                <a href="/localquaker/subject/{{subject.url}}" class="list-group-item"> {{subject.name}} </a>
+            {% endfor %} 
+{% endblock %}       
+
+{% block body_block %}
+	
+    {% if subjects %}
+         <strong>   Choose the subject you wish to buy books for from the categories above. </strong>
+
+    {% else %}
+                <strong>No one is selling books at this moment.</strong>
+    {% endif %}
+            </br>
+            <hr>
+            {% if user.is_authenticated %}
+            
+            <font size="4">            
+            <a href="/localquaker/add_subject"> Don't see the subject you seek on the list? Add it!</a>
+            </font>
+            {% endif %}
+        
+{% endblock %}

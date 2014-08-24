@@ -1,0 +1,54 @@
+{% extends "penntext/base.html" %}
+{% load static %}
+
+
+
+{% block body_block %}
+
+
+        <div class="jumbotron">
+        <h1>Welcome to LocalQuaker!</h1>
+        <p class="lead">If you are new here, refer to below for instructions</p>
+        {% if user.is_authenticated %}
+
+        <p><a class="btn btn-lg btn-success" href="https://www.facebook.com/tshahriar1" role="button">Visit my Facebook profile if you have any suggestions</a></p>
+        
+        {% else %}
+        <a class="btn btn-lg btn-success" href="/localquaker/register" role="button">Join Now</a>
+
+        <a class="btn btn-lg btn-success" href="/localquaker/login" role="button">Login Here!</a>
+        {% endif %}
+
+
+      </div>
+<hr>
+<font size="4">
+        Thank you for visiting LocalQuaker! <br> <br>
+
+        Clicking on <a href="/localquaker/">Home</a> takes you back to the homepage of the LocalQuaker. <br><br>
+        Similarly, clicking on <a href="/localquaker/about/">About</a> takes you to the about page. <br><br>
+
+        If you are logged in, above you will see <a href="/localquaker/my_sale/">My Sales</a> and <a href="/localquaker/logout/">Logout</a>. My Sales tab allows you to see all the items you have put up for sale. This is an easy way to track all the items you have put up. You may also delete items from that tab, allowing you to get rid of advertises that you no longer need. The Logout tab simply logs you out. <br><br>
+
+        If you aren't logged in, you need to either <a href="/localquaker/login/">Login</a> or <a href="/localquaker/register/">Register</a>. <br><br>
+        
+        The second bar has categories in them for you to post your advertisements on. Each of them are described below: <br><br>
+
+        <a href="/localquaker/subject/"> Books (Subjects) </a> tab is for books, and they are categorized by subjects. Enter the tab and find the subject you wish to find/sell books on. If your subject isn't there, it hasn't been made yet! If that is the case, and you were looking to buy the book, I am sorry. However, if you wish to sell a book for the subject, feel free to add it! <br><br>
+        
+        <a href="/localquaker/term/"> Subletting (Terms) </a> is similar to "Books" in the sense that the advertisements are categorized further. Inside the tab, the advertisements are divided according to the school terms the houses will be rented out on. This tab is meant for those who wish to sublet their house for summer, spring or fall. <br><br>
+
+
+        <a href="/localquaker/ticketsell/"> Tickets </a> tab is for selling tickets. The tickets aren't limited to tickets for Penn clubs, but can be used to sell tickets to each other of any form. <br><br>
+
+        <a href="/localquaker/householdsell/"> Household Items </a> tab is for selling appliances, furnitures, gaming devices, cloths and anything that is tangible, stored inside a house and is common for everyone to have. <br><br>
+        
+        <a href="/localquaker/other/"> Others </a> tab is there for people to sell the unconventional items (Do you have a wig collection or wish to sell your Magic the Gathering cards?) <br> <br>
+
+        If you like an item and wish to purchase it, click on the "Offer Form" tab below the item. Then, proceed to filling out the short form provided. This form will send an automated email to the seller with the information you provided on your form.
+        </font>
+
+
+{% endblock %}
+
+        

@@ -1,0 +1,22 @@
+{% extends 'penntext/base.html' %}
+{% block title %} Add Household {% endblock %}
+{% block body_block %}
+    <h1>Add a Household Item</h1>
+    <form id="household_form" method="post" action="/localquaker/add_household/" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+
+      {% for field in form.visible_fields %}
+      <div class = "form-group">
+            {{ field.errors }}
+            {{ field.help_text }}
+            </br>{{ field }}
+        </div>
+        {% endfor %}
+
+      <input type="submit" name="submit" value="Create Household" />
+    </form>
+
+{% endblock %}
